@@ -13,7 +13,7 @@ class Beacon extends Model
         'major',
         'minor',
         'uid',
-        'desc',
+        'description',
         'address',
     ];
 }

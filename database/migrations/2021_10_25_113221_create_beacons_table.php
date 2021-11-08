@@ -19,7 +19,7 @@ class CreateBeaconsTable extends Migration
             $table->string('major')->nullable();
             $table->string('minor')->nullable();
             $table->string('uid')->nullable();
-            $table->string('desc')->nullable();
+            $table->string('description')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();
         });
