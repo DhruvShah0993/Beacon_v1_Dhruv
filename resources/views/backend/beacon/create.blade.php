@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{url('/admin')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('/admin/beacon')}}">Beacons</a></li>
                         <li class="breadcrumb-item active">{{isset($beacon)?'Edit':'Add'}}</li>
                     </ol>
@@ -64,8 +64,8 @@
                                     <input type="text" name="uid" class="form-control" id="uid" placeholder="Enter uid" value="{{isset($beacon)?$beacon->uid:''}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Desc</label>
-                                    <textarea name="desc" class="form-control" id="desc" placeholder="Enter desc" row="3" value="{{isset($beacon)?$beacon->desc:''}}">{{isset($beacon)?$beacon->desc:''}}</textarea>
+                                    <label for="exampleInputPassword1">Description</label>
+                                    <textarea name="description" class="form-control" id="description" placeholder="Enter description" row="3" value="{{isset($beacon)?$beacon->description:''}}">{{isset($beacon)?$beacon->description:''}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Address</label>
@@ -106,7 +106,7 @@ $(function () {
       minor: {
         required: true
       }, 
-      desc: {
+      description: {
         required: true
       }, 
       address: {
@@ -126,8 +126,8 @@ $(function () {
       minor: {
         required: "Please enter a minor",
       },
-      desc: {
-        required: "Please enter a desc",
+      description: {
+        required: "Please enter a description",
       },
       address: {
         required: "Please enter a address",

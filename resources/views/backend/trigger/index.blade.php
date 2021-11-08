@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{url('/admin')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active">Triggers</li>
                     </ol>
                 </div><!-- /.col -->
@@ -123,7 +123,7 @@
                 {data: 'beacon_id', name: 'beacon_id'},
                 {data: 'title', name: 'title'},
                 {data: 'body', name: 'body'},
-                {data: 'action', name: 'action'},
+                {data: 'action', name: 'action', searchable: false, orderable:false},
             ],
             "aoColumnDefs": [
                 {"bSortable": false, "aTargets": [3]},
@@ -138,10 +138,10 @@
                 url: "{{ url('admin/trigger') }}" + '/' + id,
                 method: 'get',
                 success: function (result) {
-                    console.log(result);
-                     $("#beacon_id").val(result.data.trigger.name);
-                     $("#title").val(result.data.trigger.title);
-                     $("#body").val(result.data.trigger.body);
+                    console.log(result.data.trigger[0].name);
+                     $("#beacon_id").val(result.data.trigger[0].name);
+                     $("#title").val(result.data.trigger[0].title);
+                     $("#body").val(result.data.trigger[0].body);
                 }
             });
         });

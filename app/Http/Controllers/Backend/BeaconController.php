@@ -26,7 +26,7 @@ class BeaconController extends Controller {
                 2 => 'major',
                 3 => 'minor',
                 4 => 'uid',
-                5 => 'desc',
+                5 => 'description',
                 6 => 'address',
             );
             $sqlTot = $sqlRec = "";
@@ -43,14 +43,14 @@ class BeaconController extends Controller {
                 $sql->orWhere('minor', 'like', '%' . $params['search']['value'] . '%');
                 $scount->orWhere('uid', 'like', '%' . $params['search']['value'] . '%');
                 $sql->orWhere('uid', 'like', '%' . $params['search']['value'] . '%');
-                $scount->orWhere('desc', 'like', '%' . $params['search']['value'] . '%');
-                $sql->orWhere('desc', 'like', '%' . $params['search']['value'] . '%');
+                // $scount->orWhere('description', 'like', '%' . $params['search']['value'] . '%');
+                // $sql->orWhere('description', 'like', '%' . $params['search']['value'] . '%');
                 $scount->orWhere('address', 'like', '%' . $params['search']['value'] . '%');
                 $sql->orWhere('address', 'like', '%' . $params['search']['value'] . '%');
             }
             //dd($params['order'][0]['column']);
             /*  if($columns[$params['order'][0]['column']]=='id')
-              $sql->orderBy('id','desc');
+              $sql->orderBy('id','description');
               else */
             $sql->orderBy($columns[$params['order'][0]['column']], $params['order'][0]['dir']);
             $sql->offset($params['start'])->limit($params['length']);
@@ -66,8 +66,8 @@ class BeaconController extends Controller {
                 $rowData['major'] = $row->major;
                 $rowData['minor'] = $row->minor;
                 $rowData['uid'] = $row->uid;
-                $rowData['desc'] = $row->desc;
-                $rowData['address'] = $row->address;
+                $rowData['description'] = $row->description;
+                $rowData['address'] = $row->address; 
                 $amsg = "<a href= 'javascript:;' id='showUser' data-id='" . be64($row->id) . "' class='btn btn-view btn-xs' title='view' data-toggle='modal' data-target='#modal-default'><i class='fa fa-eye'></i></a>&nbsp;<a href= 'beacon/" . be64($row->id) . "/edit' class='btn btn-primary btn-xs' title='edit'><i class='fa fa-edit'></i></a>&nbsp;<a href='#' data-id='" . be64($row->id) . "' class='btn btn-danger btn-xs delete_card' title='delete'><i class='fa fa-trash'></i></a>";
                 $rowData['action'] = $amsg;
                 $i++;
@@ -103,6 +103,7 @@ class BeaconController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        // dd($request->description);
         $input = $request->all();
         $messages = [];
         $rules = array(
@@ -110,7 +111,7 @@ class BeaconController extends Controller {
             'uid' => "required",
             'major' => "required",
             'minor' => "required",
-            'desc' => "required",
+            'description' => "required",
             'address' => "required",
         );
         $validator = Validator::make($input, $rules, $messages);
@@ -125,10 +126,11 @@ class BeaconController extends Controller {
                 $card->fill($input)->save();
                 return redirect()->route('beacon.index')->with('success', 'Beacon updated successfully');
             } else {
+                // dd($input);
                 Beacon::create($input);
                 return redirect()->route('beacon.index')->with('success', 'Beacon created successfully');
             }
-
+            
         }
     }
 

@@ -12,7 +12,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{url('/admin')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active">Beacons</li>
                     </ol>
                 </div><!-- /.col -->
@@ -50,7 +50,6 @@
                                         <th>Major</th>
                                         <th>Minor</th>
                                         <th>UID</th>
-                                        <th>Desc</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
@@ -65,7 +64,6 @@
                                         <th>Major</th>
                                         <th>Minor</th>
                                         <th>UID</th>
-                                        <th>Desc</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
@@ -107,8 +105,8 @@
                     <input type="email" class="form-control" id="uid" disabled>
                   </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail">Desc</label>
-                    <textarea name="desc" class="form-control" id="desc" rows="3" disabled></textarea>
+                    <label for="exampleInputEmail">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3" disabled></textarea>
                   </div>
                 <div class="form-group">
                     <label for="exampleInputEmail">Address</label>
@@ -142,9 +140,8 @@
                 {data: 'major', name: 'major'},
                 {data: 'minor', name: 'minor'},
                 {data: 'uid', name: 'uid'},
-                {data: 'desc', name: 'desc'},
                 {data: 'address', name: 'address'},
-                {data: 'action', name: 'action'},
+                {data: 'action', name: 'action', searchable: false, orderable:false},
             ],
             "aoColumnDefs": [
                 {"bSortable": false, "aTargets": [3]},
@@ -158,12 +155,12 @@
                 url: "{{ url('admin/beacon') }}" + '/' + id,
                 method: 'get',
                 success: function (result) {
-                    console.log(result.data.beacon.name);
+                    console.log(result.data.beacon.description);
                     $("#name").val(result.data.beacon.name);
                     $("#major").val(result.data.beacon.major);
                     $("#minor").val(result.data.beacon.minor);
                     $("#uid").val(result.data.beacon.uid);
-                    $("#desc").val(result.data.beacon.desc);
+                    $("#description").val(result.data.beacon.description);
                     $("#address").val(result.data.beacon.address);
                 }
             });

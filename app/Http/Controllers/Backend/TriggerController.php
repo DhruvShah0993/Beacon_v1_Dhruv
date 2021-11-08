@@ -116,9 +116,9 @@ class TriggerController extends Controller
       
     }
     public function show($id) {
-        
-        $card = Trigger::join('beacons','beacons.id','triggers.beacon_id')->where('triggers.id',$id)->get();
-        return response()->json(['status' => '200', 'message' => "Beacon fetch successfully", 'data' => ["trigger" => $card]]);
+
+        $card = Trigger::join('beacons','beacons.id','triggers.beacon_id')->where('triggers.id',bd64($id))->get();
+        return response()->json(['status' => '200', 'message' => "Trigger fetch successfully", 'data' => ["trigger" => $card]]);
     }
 
 
